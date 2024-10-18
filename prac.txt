@@ -1,0 +1,20 @@
+
+import socket
+
+def dns_lookup(input_value):
+    try:
+        
+        socket.inet_aton(input_value)    # converts an IPv4 address from its standard dotted-decimal format (like 192.168.1.1) into a packed binary format.
+        
+        domain_name = socket.gethostbyaddr(input_value)
+        print(f"IP Address: {input_value} -> Domain Name: {domain_name[0]}")
+    except socket.error:
+        try:
+            
+            ip_address = socket.gethostbyname(input_value)
+            print(f"Domain Name: {input_value} -> IP Address: {ip_address}")
+        except socket.error:
+            print(f"Could not resolve {input_value}.")
+
+input_value = input("Enter a domain name or an IP address: ")
+dns_lookup(input_value)
